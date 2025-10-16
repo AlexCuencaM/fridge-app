@@ -1,9 +1,11 @@
 package com.fridge.domain.entities;
+
 import java.util.Date;
-public class Product {
+
+public class Products {
 	private String Name;
 	private Date ExpiryDate; 
-	private Category Category;
+	private Categories Category;
 	public String getName() {
 		return Name;
 	}
@@ -17,10 +19,10 @@ public class Product {
 	public void setExpiryDate(Date expiryDate) {
 		ExpiryDate = expiryDate;
 	}
-	public Category getCategory() {
+	public Categories getCategory() {
 		return Category;
 	}
-	public void setCategory(Category category) {
+	public void setCategory(Categories category) {
 		Category = category;
 	}
 }

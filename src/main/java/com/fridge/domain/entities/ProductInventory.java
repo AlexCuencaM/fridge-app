@@ -2,7 +2,7 @@ package com.fridge.domain.entities;
 
 public class ProductInventory {
 	private int Stock;
-	private Product Product;
+	private Products Product;
 	
 	public int getStock() {
 		return Stock;
@@ -12,11 +12,11 @@ public class ProductInventory {
 		Stock = stock;
 	}
 
-	public Product getProduct() {
+	public Products getProduct() {
 		return Product;
 	}
 
-	public void setProduct(Product product) {
+	public void setProduct(Products product) {
 		
 		Product = product;
 	}

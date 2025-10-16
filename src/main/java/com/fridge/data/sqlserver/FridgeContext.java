@@ -9,7 +9,7 @@ public class FridgeContext {
     static {
         try {
             Configuration configuration = new Configuration()
-                .configure("/com/hibernate/hibernate.cfg.xml");
+                .configure("hibernate.cfg.xml");
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
                 .applySettings(configuration.getProperties())
                 .build();

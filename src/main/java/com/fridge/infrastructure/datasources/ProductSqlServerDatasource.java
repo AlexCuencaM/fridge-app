@@ -6,18 +6,19 @@ import org.hibernate.Session;
 
 import com.fridge.data.sqlserver.FridgeContext;
 import com.fridge.domain.datasources.IProductDatasource;
-import com.fridge.domain.entities.Product;
-
+//import com.fridge.domain.entities.Categories;
+import com.fridge.domain.entities.Products;
+import com.hibernate.Product;
 public class ProductSqlServerDatasource implements IProductDatasource {
 
 	@Override
-	public CompletableFuture<Void> addProduct(Product product) {
+	public CompletableFuture<Void> addProduct(Products product) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public CompletableFuture<Void> updateProduct(Product product) {
+	public CompletableFuture<Void> updateProduct(Products product) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -28,27 +29,65 @@ public class ProductSqlServerDatasource implements IProductDatasource {
 		return null;
 	}
 	@Override
-	public CompletableFuture<List<Product>> getAllProducts() {
+	public CompletableFuture<List<Products>> getAllProducts() {
 		return CompletableFuture.supplyAsync(() -> {
 			Session session = FridgeContext.getSessionFactory().openSession();
-			List<com.hibernate.Product> productsDb = session.createQuery(
-				"SELECT p FROM Product p JOIN FETCH p.Category", com.hibernate.Product.class).list();
+			List<Product> productsDb = session.createQuery(
+				"SELECT p FROM Product p", Product.class).getResultList();
 			// Map before closing session to avoid LazyInitializationException
-			List<Product> domainProducts = productsDb.stream().map(p -> {
-				Product domainProduct = new Product();
+			List<Products> domainProducts = productsDb.stream().map(p -> {
+				Products domainProduct = new Products();
 				domainProduct.setName(p.Name);
 				domainProduct.setExpiryDate(p.ExpiryDate);
-				if (p.Category != null) {
-					com.fridge.domain.entities.Category domainCategory = new com.fridge.domain.entities.Category();
+				/*if (p.Category != null) {
+					Category domainCategory = new Category();
 					domainCategory.setId(p.Category.Id);
 					domainCategory.setName(p.Category.Name);
 					domainProduct.setCategory(domainCategory);
-				}
+				}*/
 				return domainProduct;
 			}).toList();
 			session.close();
 			return domainProducts;
 		});
+	}
+
+	@Override
+	public List<Products> getAllProductsSync() {
+		// TODO Auto-generated method stub
+		Session session = FridgeContext.getSessionFactory().openSession();
+		List<Product> productsDb = session.createQuery(
+			"SELECT p FROM Product p", Product.class).getResultList();
+		// Map before closing session to avoid LazyInitializationException
+		List<Products> domainProducts = productsDb.stream().map(p -> {
+			Products domainProduct = new Products();
+			domainProduct.setName(p.Name);
+			domainProduct.setExpiryDate(p.ExpiryDate);
+			/*if (p.Category != null) {
+				Category domainCategory = new Category();
+				domainCategory.setId(p.Category.Id);
+				domainCategory.setName(p.Category.Name);
+				domainProduct.setCategory(domainCategory);
+			}*/
+			return domainProduct;
+		}).toList();
+		session.close();
+		return domainProducts;
+	}
+
+	@Override
+	public Void addProductSync(Products product) {
+		// TODO Auto-generated method stub
+		Session session = FridgeContext.getSessionFactory().openSession();
+		session.beginTransaction();
+		Product dbProduct = new Product();
+		dbProduct.Name = product.getName();
+		dbProduct.ExpiryDate = product.getExpiryDate();
+		session.save(dbProduct);
+		session.getTransaction().commit();
+		session.getSessionFactory().close();
+		
+		
 	}
 	
 }

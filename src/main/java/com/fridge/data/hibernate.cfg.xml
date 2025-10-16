@@ -6,10 +6,10 @@
     <session-factory>
         <!-- SQL Server JDBC connection -->
         <property name="hibernate.connection.driver_class">com.microsoft.sqlserver.jdbc.SQLServerDriver</property>
-        <!-- Using SQL Server Authentication -->
-        <property name="hibernate.connection.url">jdbc:sqlserver://GYESISLAP013\EXPOTUNALOCAL;databaseName=FridgeApp;trustServerCertificate=true</property>
-        <property name="hibernate.connection.username">sa</property>
-        <property name="hibernate.connection.password">sa</property>
+        <!-- Using Windows Integrated Authentication. Requires the Microsoft JDBC driver and the matching sqljdbc_auth.dll on the JVM library path. -->
+        <property name="hibernate.connection.url">jdbc:sqlserver://GYESISLAP013;instanceName=EXPOTUNALOCAL;databaseName=FridgeApp;integratedSecurity=true</property>
+        <!-- Hibernate dialect for SQL Server -->
+        <property name="hibernate.dialect">org.hibernate.dialect.SQLServerDialect</property>
         <!-- Other Hibernate properties -->
         <property name="hibernate.show_sql">true</property>
         <property name="hibernate.highlight_sql">true</property>
@@ -17,8 +17,8 @@
         <!-- Use the full property name for schema generation -->
         <property name="hibernate.hbm2ddl.auto">update</property>  
         <!-- Mapping classes: use the actual entity FQNs under com.fridge.domain.entities -->
-        <mapping class="com.hibernate.Product"/>
-        <mapping class="com.hibernate.Category"/>
+        <mapping class="com.fridge.domain.entities.Product"/>
+        <mapping class="com.fridge.domain.entities.Category"/>
     </session-factory>
 </hibernate-configuration>
-<!-- End of fridge-app/src/main/resources/hibernate.cfg.xml -->
+<!-- End of fridge-app/src/main/java/com/fridge/data/hibernate.cfg.xml -->

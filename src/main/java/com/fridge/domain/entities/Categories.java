@@ -1,6 +1,5 @@
 package com.fridge.domain.entities;
-
-public class Category {
+public class Categories {
 	private int Id;
 	
 	private String Name;
