@@ -7,7 +7,8 @@ public interface IProductDatasource {
 	CompletableFuture<Void> addProduct(Products product);
 	Void addProductSync(Products product);
 	CompletableFuture<Void> updateProduct(Products product);
-	CompletableFuture<Void> deleteProduct(int productId);
+	CompletableFuture<Void> deleteProduct(Products product);
 	CompletableFuture<List<Products>> getAllProducts();
+	Products findProductById(int id);
 	List<Products> getAllProductsSync();
 }

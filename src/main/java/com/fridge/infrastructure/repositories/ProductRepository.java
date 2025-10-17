@@ -17,19 +17,12 @@ public class ProductRepository implements IProductRepository {
 	@Override
 	public CompletableFuture<Void> addProduct(Products product) {
 		// TODO Auto-generated method stub
-		return null;
+		return this._dataSource.addProduct(product);
 	}
-
 	@Override
-	public CompletableFuture<Void> updateProduct(Products product) {
+	public CompletableFuture<Void> deleteProduct(Products product) {
 		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public CompletableFuture<Void> deleteProduct(int productId) {
-		// TODO Auto-generated method stub
-		return null;
+		return this._dataSource.deleteProduct(product);
 	}
 	@Override
 	public CompletableFuture<List<Products>> getAllProducts() {
@@ -41,6 +34,18 @@ public class ProductRepository implements IProductRepository {
 	public List<Products> getAllProductsSync() {
 		// TODO Auto-generated method stub
 		return this._dataSource.getAllProductsSync();
+	}
+
+	@Override
+	public CompletableFuture<Void> updateProduct(Products product) {
+		// TODO Auto-generated method stub
+		return this._dataSource.updateProduct(product);
+	}
+
+	@Override
+	public Products findProductById(int productId) {
+		// TODO Auto-generated method stub
+		return this._dataSource.findProductById(productId);
 	}
 
 }

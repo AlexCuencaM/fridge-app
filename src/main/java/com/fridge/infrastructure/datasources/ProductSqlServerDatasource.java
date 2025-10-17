@@ -23,11 +23,7 @@ public class ProductSqlServerDatasource implements IProductDatasource {
 		return null;
 	}
 
-	@Override
-	public CompletableFuture<Void> deleteProduct(int productId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 	@Override
 	public CompletableFuture<List<Products>> getAllProducts() {
 		return CompletableFuture.supplyAsync(() -> {
@@ -83,11 +79,23 @@ public class ProductSqlServerDatasource implements IProductDatasource {
 		Product dbProduct = new Product();
 		dbProduct.Name = product.getName();
 		dbProduct.ExpiryDate = product.getExpiryDate();
-		session.save(dbProduct);
 		session.getTransaction().commit();
 		session.getSessionFactory().close();
+		return null;
 		
 		
+	}
+
+	@Override
+	public CompletableFuture<Void> deleteProduct(Products product) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Products findProductById(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
