@@ -10,7 +10,8 @@ import com.fridge.domain.usecases.product.IPostProducts;
 import com.fridge.domain.usecases.product.IPutProducts;
 import com.fridge.domain.usecases.product.PostProducts;
 import com.fridge.domain.usecases.product.PutProducts;
-import com.fridge.infrastructure.datasources.ProductInMemoryDataSource;
+//import com.fridge.infrastructure.datasources.ProductInMemoryDataSource;
+import com.fridge.infrastructure.datasources.ProductSqlServerDatasource;
 import com.fridge.infrastructure.repositories.ProductRepository;
 import com.fridge.presentation.GUI.GuiServer;
 
@@ -19,7 +20,8 @@ public class App
     public static void main( String[] args )
     {
     	System.out.println( "Welcome to the Fridge App!" );
-		IProductDatasource dataSource = new ProductInMemoryDataSource();
+		//IProductDatasource dataSource = new ProductInMemoryDataSource();
+    	IProductDatasource dataSource = new ProductSqlServerDatasource();
 		IProductRepository productRepository = new ProductRepository(dataSource);
 		IGetProducts getProducts = new GetProducts(productRepository);
 		IPostProducts postProducts = new PostProducts(productRepository);

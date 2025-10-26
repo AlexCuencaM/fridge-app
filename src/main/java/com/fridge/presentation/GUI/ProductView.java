@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ExecutionException;
+import java.util.List;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TableEditor;
@@ -21,7 +22,7 @@ import com.fridge.domain.usecases.product.IPutProducts;
 public class ProductView {
     private Table table;
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-    private final ArrayList<Control> editors = new ArrayList<Control>();
+    private final List<Control> editors = new ArrayList<Control>();
 
     private IGetProducts getProducts;
 	private IPostProducts postProducts;
@@ -105,9 +106,11 @@ public class ProductView {
     	for (Control c : editors) {
             if (!c.isDisposed()) c.dispose();
         }
+    	System.out.println("Refreshing product table...");
     	editors.clear();
         table.removeAll();
-        for (Products product : this.getProducts.executeSync()) {
+        List<Products> products = this.getProducts.executeSync();
+        for (Products product : products) {
         	TableItem item = new TableItem(table, SWT.NONE);
             item.setText(0, String.valueOf(product.getId()));
             item.setText(1, product.getName());
@@ -182,12 +185,14 @@ public class ProductView {
                 	newProduct.setName(name);
                 	newProduct.getProductInventory().setPrice(price);
                 	newProduct.getProductInventory().setExpiryDate(expiry);
-                	this.postProducts.executeSync(newProduct);
+                	this.postProducts.executeSync(newProduct).get();
+                	//System.out.println("Added new product: " + name);
                 } else {
                     existingProduct.setName(name);
                     existingProduct.getProductInventory().setPrice(price);
                     existingProduct.getProductInventory().setExpiryDate(expiry);
                     this.putProducts.execute(existingProduct.getId(), existingProduct).get();
+                    //System.out.println("Modified product: " + name);
                 }
                 refreshTable(parent);
                 form.close();
