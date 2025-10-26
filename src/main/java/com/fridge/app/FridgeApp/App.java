@@ -25,31 +25,9 @@ public class App
 		IPostProducts postProducts = new PostProducts(productRepository);
 		IPutProducts putProducts = new PutProducts(productRepository);
 		IDeleteProducts deleteProducts = new DeleteProducts(productRepository);
+		
 		GuiServer guiServer = new GuiServer(getProducts, postProducts, putProducts, deleteProducts);
+		
 		guiServer.start();
-		/*
-		postProducts.executeSync(new Products(0, "Milk", new java.util.Date()));
-		postProducts.executeSync(new Products(1, "Eggs", new java.util.Date()));
-		postProducts.executeSync(new Products(2, "Meat", new java.util.Date()));
-		System.out.println("Querying products synchronously...");
-		getProducts.executeSync().forEach(product -> {
-			System.out.println("Product Name: " + product.getName() + ", Expiry Date: " + product.getExpiryDate());
-		});
-		
-		System.out.println("Modifying a product...");
-		putProducts.execute(1, new Products(1, "Organic Eggs", new java.util.Date())).get();
-		System.out.println("Querying products synchronously...");
-		getProducts.executeSync().forEach(product -> {
-			System.out.println("Product Name: " + product.getName() + ", Expiry Date: " + product.getExpiryDate());
-		});
-		
-		System.out.println("Deleting a product...");
-		deleteProducts.execute(0).get();
-		System.out.println("Querying products synchronously...");
-		getProducts.executeSync().forEach(product -> {
-			System.out.println("Product Name: " + product.getName() + ", Expiry Date: " + product.getExpiryDate());
-		});
-		*/
-    	
     }
 }

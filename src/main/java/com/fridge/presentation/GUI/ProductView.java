@@ -203,7 +203,6 @@ public class ProductView {
 				e1.printStackTrace();
 			}
         });
-
         form.open();
     }
 
