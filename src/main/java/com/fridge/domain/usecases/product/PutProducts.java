@@ -16,8 +16,8 @@ public class PutProducts implements IPutProducts {
 		// TODO Auto-generated method stub
 		Products product = this._productRepository.findProductById(productId);
 		product.setName(newProduct.getName());
-        product.setExpiryDate(newProduct.getExpiryDate());
-		product.setCategory(newProduct.getCategory());
+        product.setExpiryDate(newProduct.getProductInventory().getExpiryDate());
+		//product.setCategory(newProduct.getCategory());
 		return this._productRepository.updateProduct(product);
 	}
 

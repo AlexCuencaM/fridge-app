@@ -17,6 +17,12 @@ public class ProductInMemoryDataSource implements IProductDatasource {
 	public CompletableFuture<Void> addProduct(Products product) {
 		// TODO Auto-generated method stub
 		return CompletableFuture.runAsync(() -> {
+			Products lastProduct = products.isEmpty() ? null : products.get(products.size() - 1);
+			if(lastProduct != null) {
+				product.setId(lastProduct.getId() + 1);
+			} else {
+				product.setId(1);
+			}
 			products.add(product);
 		});
 	}

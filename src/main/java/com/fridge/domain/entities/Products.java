@@ -1,19 +1,17 @@
 package com.fridge.domain.entities;
 
-import java.util.Date;
 
 public class Products {
 	private int Id;
 	private String Name;
-	private Date ExpiryDate; 
-	private Categories Category;
-	public Products(int id, String name, Date expiryDate) {
+	private ProductInventory productInventory;
+	public Products(int id, String name) {
 		Id = id;
 		Name = name;
-		ExpiryDate = expiryDate;
 	}
 	public Products() {
 		// TODO Auto-generated constructor stub
+		this.productInventory = new ProductInventory();
 	}
 	public String getName() {
 		return Name;
@@ -21,23 +19,22 @@ public class Products {
 	public void setName(String name) {
 		Name = name;
 	}
-	public Date getExpiryDate() {
-		return ExpiryDate;
-	}
-
-	public void setExpiryDate(Date expiryDate) {
-		ExpiryDate = expiryDate;
-	}
-	public Categories getCategory() {
-		return Category;
-	}
-	public void setCategory(Categories category) {
-		Category = category;
-	}
 	public int getId() {
 		return Id;
 	}
 	public void setId(int id) {
 		Id = id;
+	}
+	public ProductInventory getProductInventory() {
+		return productInventory;
+	}
+	public void setProductInventory(ProductInventory productInventory) {
+		this.productInventory = productInventory;
+	}
+	public java.util.Date getExpiryDate() {
+		return this.productInventory.getExpiryDate();
+	}
+	public void setExpiryDate(java.util.Date expiryDate) {
+		this.productInventory.setExpiryDate(expiryDate);
 	}
 }

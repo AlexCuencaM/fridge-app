@@ -14,6 +14,7 @@ public class PostProducts implements IPostProducts {
 	@Override
 	public CompletableFuture<Void> executeSync(Products newProduct) {
 		// TODO Auto-generated method stub
+		
 		return _productRepository.addProduct(newProduct);
 	}
 

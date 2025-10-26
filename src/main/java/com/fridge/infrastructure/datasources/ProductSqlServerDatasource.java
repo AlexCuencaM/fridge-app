@@ -78,7 +78,7 @@ public class ProductSqlServerDatasource implements IProductDatasource {
 		session.beginTransaction();
 		Product dbProduct = new Product();
 		dbProduct.Name = product.getName();
-		dbProduct.ExpiryDate = product.getExpiryDate();
+		dbProduct.ExpiryDate = product.getProductInventory().getExpiryDate();
 		session.getTransaction().commit();
 		session.getSessionFactory().close();
 		return null;
